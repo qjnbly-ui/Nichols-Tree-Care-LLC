@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact | Nichols Tree Care LLC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <section class="contact-wrap">
+        <h1>Nichols Tree Care LLC</h1>
+        <p>Reach us directly at the details below.</p>
+        <div class="info-list">
+          <button class="info-item info-item-button info-item-glow" id="downloadVcfBtn" type="button">
+            <span>Contact Card</span>
+            <span class="info-action">
+              <svg class="download-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 4v9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                <path d="M8.5 10.5 12 14l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M4.5 17.5c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+              Download Contact Info
+            </span>
+          </button>
+          <div class="info-item">
+            <span>Website</span>
+            <a href="https://nicholstreecarellc.com" target="_blank" rel="noopener">nicholstreecarellc.com</a>
+          </div>
+          <div class="info-item">
+            <span>Email</span>
+            <a href="mailto:luke@nicholstreecarellc.com">luke@nicholstreecarellc.com</a>
+          </div>
+          <div class="info-item">
+            <span>Phone</span>
+            <a href="tel:+15418808874">(541) 880-8874</a>
+          </div>
+        </div>
+        <a class="back-link" href="index.html">Back to home</a>
+      </section>
+    </main>
+    <script>
+      (function () {
+        const btn = document.getElementById("downloadVcfBtn");
+        if (!btn) return;
+
+        btn.addEventListener("click", function () {
+          const vcf =
+            "BEGIN:VCARD\r\n" +
+            "VERSION:3.0\r\n" +
+            "N:Nichols;Luke;;;\r\n" +
+            "FN:Luke Nichols\r\n" +
+            "ORG:Nichols Tree Care LLC\r\n" +
+            "TITLE:Owner\r\n" +
+            "URL:https://nicholstreecarellc.com\r\n" +
+            "EMAIL;TYPE=WORK:luke@nicholstreecarellc.com\r\n" +
+            "TEL;TYPE=WORK,VOICE:+15418808874\r\n" +
+            "END:VCARD\r\n";
+
+          const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
+          const url = URL.createObjectURL(blob);
+
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "Luke-Nichols.vcf";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+
+          setTimeout(() => URL.revokeObjectURL(url), 800);
+        });
+      })();
+    </script>
+  </body>
+</html>

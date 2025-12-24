@@ -1,0 +1,196 @@
+:root {
+  color-scheme: only light;
+  --bg: #060607;
+  --bg-accent: #0c0c10;
+  --text: #f1f1f3;
+  --muted: #b7b7c2;
+  --accent: #c8ff6a;
+  --accent-strong: #a8ff2b;
+  --panel: rgba(20, 20, 26, 0.75);
+  --stroke: rgba(255, 255, 255, 0.12);
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(1200px 600px at 15% 0%, #11131a, transparent 70%),
+    radial-gradient(1000px 700px at 80% 10%, #0b0c12, transparent 70%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Bebas Neue", "Oswald", "Impact", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.hero {
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  margin: 0 0 18px;
+  text-transform: uppercase;
+}
+
+.hero p {
+  margin: 0 0 26px;
+  font-size: clamp(1rem, 2.6vw, 1.4rem);
+  color: var(--muted);
+  font-family: "Work Sans", "Segoe UI", sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  color: #0b0b0d;
+  background: linear-gradient(120deg, var(--accent), var(--accent-strong));
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Work Sans", "Segoe UI", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  box-shadow: 0 16px 40px rgba(168, 255, 43, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 18px 50px rgba(168, 255, 43, 0.4);
+}
+
+.contact-wrap {
+  width: min(680px, 100%);
+  background: var(--panel);
+  border-radius: 24px;
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow);
+  padding: 34px;
+  backdrop-filter: blur(16px);
+}
+
+.contact-wrap h1 {
+  margin: 0 0 6px;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  text-transform: uppercase;
+}
+
+.contact-wrap p {
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-family: "Work Sans", "Segoe UI", sans-serif;
+  letter-spacing: 0.06em;
+}
+
+.info-list {
+  display: grid;
+  gap: 16px;
+  font-family: "Work Sans", "Segoe UI", sans-serif;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(12, 12, 16, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.info-item span {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.info-item-button {
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  background: rgba(12, 12, 16, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  appearance: none;
+  -webkit-appearance: none;
+  align-items: center;
+}
+
+.info-item-glow {
+  border-color: rgba(96, 165, 250, 0.7);
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.4), 0 0 18px rgba(59, 130, 246, 0.35);
+}
+
+.info-item-glow:hover {
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.55), 0 0 24px rgba(59, 130, 246, 0.45);
+}
+
+.info-action {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.download-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.info-item a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.info-item a:hover {
+  color: var(--accent);
+}
+
+.back-link {
+  display: inline-flex;
+  margin-top: 24px;
+  color: var(--muted);
+  text-decoration: none;
+  font-family: "Work Sans", "Segoe UI", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .contact-wrap {
+    padding: 24px;
+  }
+
+  .hero h1 {
+    letter-spacing: 0.2px;
+  }
+}
