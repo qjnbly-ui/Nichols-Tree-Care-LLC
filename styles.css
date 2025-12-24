@@ -48,6 +48,7 @@ main {
   height: auto;
   object-fit: contain;
   margin-bottom: 6px;
+  transform: scale(1.03);
 }
 
 .hero h1 {
