@@ -232,6 +232,29 @@ main {
   color: var(--accent);
 }
 
+.site-footer-credit {
+  padding: 0 16px 28px;
+  text-align: center;
+  font-family: "Work Sans", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.site-footer-credit p {
+  margin: 0;
+}
+
+.site-footer-credit a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-footer-credit a:hover {
+  opacity: 0.8;
+}
+
 @media (max-width: 600px) {
   .contact-wrap {
     padding: 24px;
