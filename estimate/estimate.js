@@ -147,49 +147,40 @@ fileInput.addEventListener("change", () => {
   fileMeta.textContent = formatFiles(fileInput.files);
 });
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  clearStatus();
 
-  const valid = validate();
-  if (!valid) {
-    setStatus("Please fix the highlighted fields.", "error");
-    return;
-  }
-
-  const payload = {
-    requestId: buildRequestId(),
-    timestamp: new Date().toISOString(),
-    fullName: fields.fullName.value.trim(),
-    email: fields.email.value.trim(),
-    phone: fields.phone.value.trim(),
-    contactMethod: fields.contactMethod().value,
-    serviceType: fields.serviceType.value,
-    notes: fields.notes.value.trim(),
-    address: {
-      street: fields.street.value.trim(),
-      city: fields.city.value.trim(),
-      state: fields.state.value,
-      zip: fields.zip.value.trim()
-    },
-    files: Array.from(fileInput.files).map((file) => ({
-      name: file.name,
-      type: file.type,
-      size: file.size
-    })),
-    propertyConfirmed: fields.propertyConfirm.checked
-  };
-
-  console.log("SEND_TO_LUKE", payload);
-  console.log("SEND_CONFIRMATION_TO_CUSTOMER", payload);
-
-  setStatus("Request submitted. We'll contact you soon.", "success");
-  submitBtn.disabled = true;
-
-  window.setTimeout(() => {
-    form.reset();
-    fileMeta.textContent = "No files selected";
-    submitBtn.disabled = false;
-    clearStatus();
-  }, 3000);
+let requestKey = sessionStorage.getItem("ntc-request-key") || crypto.randomUUID();
+sessionStorage.setItem("ntc-request-key", requestKey);
+async function preparePhoto(file) {
+  if (!["image/jpeg","image/png","image/webp"].includes(file.type) || file.size > 20 * 1024 * 1024) throw new Error("Choose JPG, PNG, or WebP photos smaller than 20 MB each.");
+  const bitmap = await createImageBitmap(file);
+  const canvas = document.createElement("canvas");
+  const scale = Math.min(1, 1600 / Math.max(bitmap.width, bitmap.height));
+  canvas.width = Math.max(1,Math.round(bitmap.width * scale)); canvas.height = Math.max(1,Math.round(bitmap.height * scale));
+  canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height); bitmap.close();
+  let data = canvas.toDataURL("image/jpeg",.8).split(",")[1];
+  if (data.length > 1250000) data = canvas.toDataURL("image/jpeg",.55).split(",")[1];
+  if (data.length > 1250000) throw new Error("This photograph is too large. Please choose a smaller image.");
+  return {name:file.name,type:"image/jpeg",data};
+}
+form.addEventListener("submit", async (event) => {
+  event.preventDefault(); clearStatus();
+  if (!validate()) { setStatus("Please fix the highlighted fields.","error"); form.querySelector(".error")?.focus(); return; }
+  if (!fields.street.value.trim() || !fields.city.value.trim() || !fields.state.value) {setStatus("Add the street, city, and state where the work is needed.","error");fields.street.focus();return;}
+  if (fileInput.files.length > 4) {setStatus("Choose up to four photographs.","error");return;}
+  submitBtn.disabled=true;submitBtn.textContent="Saving request…";
+  try {
+    const photos = await Promise.all(Array.from(fileInput.files).map(preparePhoto));
+    const response = await fetch("https://www.n3xra.com/api/service-jobs",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
+      slug:"nichols-tree-care", request_key:requestKey, website_url:document.getElementById("website_url").value,
+      name:fields.fullName.value.trim(), company:document.getElementById("company").value.trim(), email:fields.email.value.trim(), phone:fields.phone.value.trim(), contact_method:fields.contactMethod().value, service_type:fields.serviceType.value, description:fields.notes.value.trim(),
+      address:[fields.street.value.trim(),fields.city.value.trim(),fields.state.value,fields.zip.value.trim()].filter(Boolean).join(", "),
+      primary_address:document.getElementById("primaryAddress").value.trim(), property_confirmed:fields.propertyConfirm.checked, photos
+    })});
+    const result=await response.json();
+    if (!response.ok || !result.accepted) throw new Error(result.error||"Your request could not be saved. Please try again.");
+    form.reset();fileMeta.textContent="No files selected";
+    setStatus(`Request saved. Your reference is ${result.reference}. Nichols Tree Care will follow up using your preferred contact method.`,"success");
+    requestKey=crypto.randomUUID();sessionStorage.setItem("ntc-request-key",requestKey);statusEl.scrollIntoView({behavior:"smooth",block:"center"});
+  } catch(error) {setStatus(error.message||"Your request could not be saved. Please try again, or call (541) 880-8874.","error");}
+  finally {submitBtn.disabled=false;submitBtn.textContent="Submit Estimate Request";}
 });
