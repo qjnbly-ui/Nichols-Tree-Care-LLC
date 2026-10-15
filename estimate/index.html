@@ -4,20 +4,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Request an Estimate | Nichols Tree Care LLC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="estimate.css">
 </head>
 <body>
+  <nav class="estimate-nav"><a href="/"><img src="/images/CanopyCowboyNoText.png" alt="">Nichols Tree Care LLC</a><a href="/contact/">Contact</a></nav>
   <main class="estimate-page">
     <div class="estimate-container">
       <header class="estimate-header">
         <h1>Request an Estimate</h1>
-        <span class="estimate-subtitle">Send directly to Nichols Tree Care LLC</span>
+        <span class="estimate-subtitle">Tell us about the work. We’ll review your request and follow up.</span>
       </header>
 
       <div id="form-status" class="form-status" aria-live="polite" role="status"></div>
 
       <form id="estimate-form" novalidate>
+        <div class="trap" aria-hidden="true"><label>Website<input name="website_url" id="website_url" tabindex="-1" autocomplete="off"></label></div>
+        <div class="field"><label for="company">Company / property manager (optional)</label><input id="company" name="company" maxlength="160" autocomplete="organization"></div>
         <div class="form-grid">
           <div class="field">
             <label for="fullName">Full Name<span class="required">*</span></label>
@@ -69,24 +73,24 @@
         </div>
 
         <section class="address-section">
-          <h2>Property Address (Optional)</h2>
+          <h2>Service Property Address</h2>
           <div class="form-grid">
             <div class="field">
               <label for="street">Street</label>
-              <input type="text" id="street" name="street" autocomplete="street-address">
+              <input type="text" id="street" name="street" autocomplete="street-address" maxlength="300" required>
               <div class="field-error" id="error-street" aria-live="polite"></div>
             </div>
 
             <div class="field">
               <label for="city">City</label>
-              <input type="text" id="city" name="city" autocomplete="address-level2">
+              <input type="text" id="city" name="city" autocomplete="address-level2" maxlength="160" required>
               <div class="field-error" id="error-city" aria-live="polite"></div>
             </div>
 
             <div class="field">
               <label for="state">State</label>
-              <select id="state" name="state" autocomplete="address-level1">
-                <option value="" selected>Select state</option>
+              <select id="state" name="state" autocomplete="address-level1" required>
+                <option value="">Select state</option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
@@ -123,7 +127,7 @@
                 <option value="ND">North Dakota</option>
                 <option value="OH">Ohio</option>
                 <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
+                <option value="OR" selected>Oregon</option>
                 <option value="PA">Pennsylvania</option>
                 <option value="RI">Rhode Island</option>
                 <option value="SC">South Carolina</option>
@@ -149,11 +153,12 @@
           </div>
         </section>
 
+        <div class="field"><label for="primaryAddress">Primary / mailing address (optional, if different)</label><input id="primaryAddress" maxlength="600" placeholder="For a company or a different home address"></div>
         <section class="upload-section">
           <div class="field full-width">
             <label for="photos">Upload Photos (optional)</label>
-            <input type="file" id="photos" name="photos" accept="image/*" multiple>
-            <div class="file-meta" id="fileMeta">No files selected</div>
+            <input type="file" id="photos" name="photos" accept="image/jpeg,image/png,image/webp" multiple>
+            <div class="file-meta" id="fileMeta">No files selected</div><p class="photo-help">Up to four JPG, PNG, or WebP photos. Photos are resized before upload and shared privately with the service team.</p>
             <div class="field-error" id="error-photos" aria-live="polite"></div>
           </div>
         </section>
