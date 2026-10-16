@@ -1,0 +1,44 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+<SiteLayout title="Contact | Nichols Tree Care" bodyClass="">
+<main id="main">
+      <section class="contact-wrap">
+        <h1>Let’s talk trees.</h1>
+        <p>Owner Luke Nichols.</p>
+        <div class="info-list">
+          <button
+            class="info-item info-item-button info-item-glow"
+            id="downloadVcfBtn"
+            type="button"
+            aria-label="Download contact card"
+          >
+            <span>Contact Card</span>
+            <span class="info-action">
+              <svg class="download-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 4v9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                <path d="M8.5 10.5 12 14l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M4.5 17.5c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+              Download Contact Info
+            </span>
+          </button>
+          <div class="info-item">
+            <span>Website</span>
+            <a href="https://nicholstreecarellc.com" target="_blank" rel="noopener">nicholstreecarellc.com</a>
+          </div>
+          <div class="info-item">
+            <span>Email</span>
+            <a href="mailto:luke@nicholstreecarellc.com">luke@nicholstreecarellc.com</a>
+          </div>
+          <div class="info-item">
+            <span>Phone</span>
+            <a href="tel:+15418808874">(541) 880-8874</a>
+          </div>
+        </div>
+        <p class="contact-note">Need a quote? <a href="/estimate/">Request an estimate and send photos</a>, or call or email us.</p>
+        <a class="back-link" href="/">Back to home</a>
+      </section>
+    </main>
+<script>import '../scripts/contact';</script>
+</SiteLayout>

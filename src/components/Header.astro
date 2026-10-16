@@ -1,0 +1,16 @@
+---
+import Brand from './Brand.astro';
+import { pages } from '../data/site';
+const current = Astro.url.pathname.replace(/\/?$/, '/');
+---
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="public-header page-navigation">
+  <Brand />
+  <nav class="desktop-pages" aria-label="Main navigation">{pages.map(page => <a href={page.href} aria-current={page.href === current ? 'page' : undefined}>{page.label}</a>)}</nav>
+  <button class="mobile-menu-button" type="button" aria-controls="mobile-pages" aria-expanded="false">Menu</button>
+</header>
+<dialog class="mobile-pages" id="mobile-pages" aria-label="Site navigation">
+  <div class="mobile-pages-head"><Brand /><button class="mobile-menu-close" type="button" autofocus>Close</button></div>
+  <nav aria-label="Mobile navigation">{pages.map(page => <a href={page.href} aria-current={page.href === current ? 'page' : undefined}>{page.label}</a>)}</nav>
+</dialog>
+<script>import '../scripts/navigation';</script>

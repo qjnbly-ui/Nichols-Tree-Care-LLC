@@ -1,0 +1,2 @@
+export const site = { name: 'Nichols Tree Care', phone: '(541) 880-8874', phoneHref: 'tel:+15418808874', email: 'luke@nicholstreecarellc.com', portal: 'https://nichols-tree-care.portal.n3xra.com/' } as const;
+export const pages = [{label:'Home',href:'/'},{label:'Request an estimate',href:'/estimate/'},{label:'Contact',href:'/contact/'},{label:'Merchandise',href:'https://shop.nicholstreecarellc.com'},{label:'Team portal',href:site.portal}] as const;
