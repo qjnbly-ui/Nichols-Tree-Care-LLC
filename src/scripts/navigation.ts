@@ -1,6 +1,7 @@
+export {};
 (() => {
-  const button = document.querySelector('.mobile-menu-button');
-  const menu = document.querySelector('#mobile-pages');
+  const button = document.querySelector<HTMLButtonElement>('.mobile-menu-button');
+  const menu = document.querySelector<HTMLDialogElement>('#mobile-pages');
   if (!button || !menu) return;
   const close = () => menu.close();
   button.addEventListener('click', () => {
@@ -8,7 +9,7 @@
     button.setAttribute('aria-expanded', 'true');
     document.body.classList.add('mobile-navigation-open');
   });
-  menu.querySelector('.mobile-menu-close').addEventListener('click', close);
+  menu.querySelector<HTMLButtonElement>('.mobile-menu-close')!.addEventListener('click', close);
   menu.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
   menu.addEventListener('close', () => {
     button.setAttribute('aria-expanded', 'false');

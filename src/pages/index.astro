@@ -1,0 +1,8 @@
+---
+import { site } from '../data/site';
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+<SiteLayout title={site.name} bodyClass="simple-home-page">
+<main id="main" class="simple-home"><section aria-labelledby="home-title"><div class="simple-logo"><img src="/images/CanopyCowboyNoText.png" alt="Nichols Tree Care Canopy Cowboy"></div><h1 id="home-title">{site.name}</h1><p>Tree removal, trimming, and property care.</p><a class="public-button" href="/estimate/">Request an estimate <span aria-hidden="true">↗</span></a><a class="simple-phone" href={site.phoneHref}>{site.phone}</a></section></main>
+
+</SiteLayout>

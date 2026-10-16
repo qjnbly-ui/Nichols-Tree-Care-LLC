@@ -1,0 +1,9 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/base.css';
+import '../styles/public-site.css';
+interface Props { title: string; description?: string; bodyClass?: string; }
+const { title, description = 'Tree removal, trimming, and property care. Send photos and request an estimate.', bodyClass = '' } = Astro.props;
+---
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title><meta name="description" content={description}><meta name="theme-color" content="#172b22"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><slot name="head" /></head><body class={`public-site ${bodyClass}`}><Header /><slot /><Footer /></body></html>
